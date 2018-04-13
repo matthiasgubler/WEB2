@@ -1,8 +1,48 @@
-html *
-{
-    font-family: Arial !important;
+#content{
+    margin: auto;
+    width: 20em;
+    border: #AAA solid 1px;
+    border-radius: 5px;
+
 }
 
-#todos{
-    margin: auto;
+ul li{
+    width: 100%;
+    list-style: none;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+#taskListTitle{
+    border-bottom: #7f7f7f solid 1px;
+}
+
+.todoItem{
+    width: 100%;
+    margin: 5px 0px 5px 0px;
+}
+
+.todoItem input[name=done]{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.todoItem input[name=title]{
+    width: 90%;
+    margin: 0;
+}
+
+.todoItem.done input[name=title]{
+    background-color: #eeeeee;
+    text-decoration: line-through;
+}
+
+button{
+    width: 100%;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    font-weight: bold;
 }

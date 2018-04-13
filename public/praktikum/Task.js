@@ -13,9 +13,12 @@ Task.prototype = {
         this.done = false;
     },
     render: function () {
+        var task = this;
+        let appendClass = task.done ? 'done' : '';
+        var parentListItem = $('<li>', {class: 'todoItem '+appendClass})
+
         var check = $('<input>', {type: 'checkbox', name: 'done', checked: this.done});
         var field = $('<input>', {type: 'text', name: 'title', value: this.title});
-        var task = this;
         field.on('change', function () {
             task.title = $(this).prop('value');
         });
@@ -23,15 +26,15 @@ Task.prototype = {
         check.on('change', function () {
             const checkbox = $(this);
             let checked = checkbox.prop('checked');
-            console.log(checked);
-            console.log(task);
             if (checked) {
+                parentListItem.addClass('done');
                 task.markDone();
             }else{
+                parentListItem.removeClass('done');
                 task.markUndone();
             }
         });
 
-        return $('<li>').append(check, field);
+        return parentListItem.append(check, field);
     }
 }

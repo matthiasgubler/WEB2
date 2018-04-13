@@ -20,7 +20,7 @@ TaskList.prototype = {
     },
     render: function () {
         var wrapperHtml = $('<div>');
-        var titleHtml = $('<h1>').text(this.title);
+        var titleHtml = $('<h1>', {id: 'taskListTitle'}).text(this.title);
         var taskListHtml = $('<ul>', {id: "taskList"});
         for (let taskItem of this.taskList) {
             taskListHtml.append(taskItem.render());
