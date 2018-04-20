@@ -24,8 +24,9 @@ describe("Task", function () {
         it("renders an checkbox and an text-input", function () {
             let renderedTask = task.render();
             expect(renderedTask.children().length).toBe(2);
-            expect(renderedTask.children()[0].type).toBe('checkbox');
-            expect(renderedTask.children()[1].type).toBe('text');
+            expect(renderedTask.find('input[name=title]'));
+            expect(renderedTask.find('input[name=done]'));
+            expect(renderedTask.find('.checkboxlabel'));
         });
         it("renders an unckeched checkbox", function () {
             let renderedTask = task.render();
