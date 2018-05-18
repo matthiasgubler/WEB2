@@ -1,16 +1,23 @@
 "use strict";
 
-var Task = function (title) {
+var Task = function (title, done, taskList) {
     this.title = title;
-    this.done = false;
+    this.done = done;
+    this.taskList = taskList;
 }
 
 Task.prototype = {
     markDone: function () {
         this.done = true;
+        taskList.dataChanged();
     },
     markUndone: function () {
         this.done = false;
+        taskList.dataChanged();
+    },
+    setTitle: function (title) {
+        this.title = title;
+        taskList.dataChanged();
     },
     render: function (i) {
         let checkBoxId = 'checkbox-'+i;
@@ -23,7 +30,7 @@ Task.prototype = {
         var fieldDiv = $('<div>', {class: 'fielddiv'});
         var field = $('<input>', {type: 'text', name: 'title', value: this.title});
         field.on('change', function () {
-            task.title = $(this).prop('value');
+            task.setTitle($(this).prop('value'));
         });
 
         check.on('change', function () {
@@ -32,15 +39,17 @@ Task.prototype = {
             if (checked) {
                 parentListItem.addClass('done');
                 task.markDone();
-                //parentListItem.slideUp();
             }else{
                 parentListItem.removeClass('done');
                 task.markUndone();
             }
         });
         fieldDiv.append(field);
-        //span.append(field);
         label.append(check, span);
         return parentListItem.append(label, fieldDiv);
     }
+}
+
+Task.mapObjectToTask = function (result, taskList){
+    return new Task(result.title, result.done, taskList);
 }

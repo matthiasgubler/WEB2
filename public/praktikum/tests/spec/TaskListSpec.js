@@ -7,28 +7,28 @@ describe("TaskList", function () {
     describe("basic features", function () {
         it("should be correctly initialized", function () {
             expect(taskList.title).toEqual("MyTitleList");
-            expect(taskList.taskList.length).toEqual(0);
+            expect(taskList.tasks.length).toEqual(0);
         });
 
         it("should possible to add elements", function () {
             taskList.addTask(new Task("Element1"));
             taskList.addTask(new Task("Element2"));
-            expect(taskList.taskList.length).toEqual(2);
-            expect(taskList.taskList[0].title).toEqual("Element1");
-            expect(taskList.taskList[1].title).toEqual("Element2");
+            expect(taskList.tasks.length).toEqual(2);
+            expect(taskList.tasks[0].title).toEqual("Element1");
+            expect(taskList.tasks[1].title).toEqual("Element2");
         });
 
         it("should possible to remove elements", function () {
             taskList.addTask(new Task("Element1"));
             var task2 = new Task("Element2");
             taskList.addTask(task2);
-            expect(taskList.taskList.length).toEqual(2);
+            expect(taskList.tasks.length).toEqual(2);
             taskList.removeTaskByIndex(0);
-            expect(taskList.taskList.length).toEqual(1);
-            expect(taskList.taskList[0].title).toEqual("Element2");
+            expect(taskList.tasks.length).toEqual(1);
+            expect(taskList.tasks[0].title).toEqual("Element2");
 
             taskList.removeTask(task2);
-            expect(taskList.taskList.length).toEqual(0);
+            expect(taskList.tasks.length).toEqual(0);
         });
     });
 

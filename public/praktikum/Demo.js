@@ -1,22 +1,36 @@
 "use strict";
-var taskList = new TaskList("Demo");
 
-$(function(){
-    taskList.addTask(new Task("Buy Milk"));
-    taskList.addTask(new Task("Freddy"));
-    renderTodoContent();
+var taskList;
 
-    $('#addTodo').on('click',function(){
-        taskList.addTask(new Task(""));
-        renderTodoContent();
-    })
+window.addEventListener("hashchange", function () {
+    loadTaskList(getHashParamOrDefault());
 });
 
-let renderTodoContent = function(){
+function taskListLoaded(loadedTaskList) {
+    taskList = loadedTaskList;
+    renderTodoContent();
+}
+
+$(function () {
+        loadTaskList(getHashParamOrDefault());
+        $('#addTodo').on('click', function () {
+            taskList.addTask(new Task("", false));
+            renderTodoContent();
+        })
+    }
+);
+
+function loadTaskList(id) {
+    TaskList.load(id, taskListLoaded);
+}
+
+let renderTodoContent = function () {
     let todoContent = $("#todos");
     todoContent.empty();
     todoContent.append(taskList.render());
-
 }
 
-
+function getHashParamOrDefault() {
+    let hashParamValue = window.location.hash.substr(1);
+    return hashParamValue === "" ? "demo" : hashParamValue;
+}
