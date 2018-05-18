@@ -48,7 +48,7 @@ TaskList.load = function (id, callback) {
         callback(TaskList.mapObjectToTaskList(result));
     }).fail(function () {
         taskList = new TaskList(id, id);
-        updateServerPost(taskList, function (result) {
+        updateServerPost("", taskList, function (result) {
             window.location.hash = result.id;
         });
     });

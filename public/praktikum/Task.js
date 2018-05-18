@@ -47,6 +47,12 @@ Task.prototype = {
         fieldDiv.append(field);
         label.append(check, span);
         return parentListItem.append(label, fieldDiv);
+    },
+    toJSON: function () {
+        return {
+            title: this.title,
+            done: this.done
+        };
     }
 }
 
