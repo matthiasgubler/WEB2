@@ -1,6 +1,6 @@
 "use strict";
 
-var apiUrl = "http://zhaw.herokuapp.com/task_lists/";
+var apiUrl = "https://zhaw.herokuapp.com/task_lists/";
 
 var TaskList = function (id, title) {
     this.id = id;
