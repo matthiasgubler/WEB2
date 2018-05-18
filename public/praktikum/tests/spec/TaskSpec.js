@@ -1,14 +1,17 @@
 "use strict";
 
 describe("Task", function () {
-    var task;
+    var task, taskList;
     beforeEach(function () {
-        task = new Task("MyTitle");
+        taskList = new TaskList("", "");
+
+        spyOn(taskList, "dataChanged");
+        task = new Task("MyTitle", false, taskList);
     });
 
     describe("basic features", function () {
         it("should be correctly initialized", function () {
-            expect(task.title).toEqual("MyTitle")
+            expect(task.title).toEqual("MyTitle");
             expect(task.done).toBeFalsy()
         });
         it("should be able mark a task as done", function () {

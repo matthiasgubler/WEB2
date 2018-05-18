@@ -1,26 +1,30 @@
 describe("TaskList", function () {
     var taskList;
     beforeEach(function () {
-        taskList = new TaskList("MyTitleList");
+        taskList = new TaskList("id", "MyTitleList");
+        spyOn(taskList, "dataChanged");
     });
 
     describe("basic features", function () {
         it("should be correctly initialized", function () {
+            expect(taskList.id).toEqual("id");
             expect(taskList.title).toEqual("MyTitleList");
             expect(taskList.tasks.length).toEqual(0);
         });
 
         it("should possible to add elements", function () {
-            taskList.addTask(new Task("Element1"));
-            taskList.addTask(new Task("Element2"));
+            taskList.addTask(new Task("Element1", false, null));
+            taskList.addTask(new Task("Element2", false, null));
             expect(taskList.tasks.length).toEqual(2);
             expect(taskList.tasks[0].title).toEqual("Element1");
             expect(taskList.tasks[1].title).toEqual("Element2");
+
+            expect(taskList.dataChanged.calls.count()).toEqual(2);
         });
 
         it("should possible to remove elements", function () {
-            taskList.addTask(new Task("Element1"));
-            var task2 = new Task("Element2");
+            taskList.addTask(new Task("Element1", false, null));
+            var task2 = new Task("Element2", false, null);
             taskList.addTask(task2);
             expect(taskList.tasks.length).toEqual(2);
             taskList.removeTaskByIndex(0);
@@ -29,6 +33,8 @@ describe("TaskList", function () {
 
             taskList.removeTask(task2);
             expect(taskList.tasks.length).toEqual(0);
+
+            expect(taskList.dataChanged.calls.count()).toEqual(4);
         });
     });
 

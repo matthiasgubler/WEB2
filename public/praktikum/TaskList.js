@@ -22,7 +22,6 @@ TaskList.prototype = {
     removeTask: function (task) {
         const index = this.tasks.indexOf(task);
         this.removeTaskByIndex(index);
-        this.dataChanged();
     },
     render: function () {
         var wrapperHtml = $('<div>');

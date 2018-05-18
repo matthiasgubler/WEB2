@@ -9,15 +9,15 @@ var Task = function (title, done, taskList) {
 Task.prototype = {
     markDone: function () {
         this.done = true;
-        taskList.dataChanged();
+        this.taskList.dataChanged();
     },
     markUndone: function () {
         this.done = false;
-        taskList.dataChanged();
+        this.taskList.dataChanged();
     },
     setTitle: function (title) {
         this.title = title;
-        taskList.dataChanged();
+        this.taskList.dataChanged();
     },
     render: function (i) {
         let checkBoxId = 'checkbox-'+i;
